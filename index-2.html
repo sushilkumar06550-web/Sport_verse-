@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportVerse — Graphic &amp; Web Designer</title>
+<meta name="description" content="SportVerse — Sports branding, logo &amp; web design studio. One Universe. Endless Sports.">
+<link rel="icon" href="assets/icon-globe.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#141414;
+    --navy-deep:#000000;
+    --orange:#ff5a1f;
+    --orange-2:#ff8a3d;
+    --ice:#eef2f8;
+    --white:#ffffff;
+    --line: rgba(238,242,248,0.12);
+    --max: 1160px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy-deep);
+    color:var(--ice);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--orange); color:var(--navy-deep);}
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  /* ---------- background texture ---------- */
+  .bg-grid{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,90,31,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,90,31,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:38px; width:38px; object-fit:contain;}
+  .brand span{
+    font-family:'Oswald', sans-serif; font-weight:700; font-size:20px;
+    letter-spacing:0.5px; text-transform:uppercase;
+  }
+  .brand span em{color:var(--orange); font-style:normal;}
+  nav{display:flex; gap:28px;}
+  nav a{
+    font-family:'Oswald', sans-serif; font-size:13px; font-weight:500;
+    letter-spacing:1.5px; text-transform:uppercase; color:#c7d2e3;
+    position:relative; padding-bottom:4px; transition:color .25s ease;
+  }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--orange); transition:width .25s ease;
+  }
+  nav a:hover{color:var(--white);}
+  nav a:hover::after{width:100%;}
+  .header-cta{
+    font-family:'Oswald',sans-serif; font-weight:600; font-size:13px;
+    letter-spacing:1px; text-transform:uppercase;
+    background:var(--orange); color:var(--navy-deep);
+    padding:10px 18px; border-radius:2px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .header-cta:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,90,31,0.35);}
+  .nav-toggle{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; z-index:1;
+    padding:170px 0 110px;
+    display:flex; align-items:center; gap:56px;
+    min-height:92vh;
+  }
+  .hero .wrap{display:flex; align-items:center; gap:56px; flex-wrap:wrap;}
+  .hero-copy{flex:1 1 480px;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Oswald', sans-serif; font-size:12px; letter-spacing:3px;
+    text-transform:uppercase; color:var(--orange-2);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:''; width:28px; height:2px; background:var(--orange);}
+  h1.headline{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(44px, 7vw, 84px);
+    line-height:0.98; text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  h1.headline .line2{
+    -webkit-text-stroke:1.5px var(--ice);
+    color:transparent;
+    display:block;
+  }
+  h1.headline .accent{color:var(--orange);}
+  .hero-sub{
+    margin-top:26px; font-size:17px; line-height:1.7; color:#aeb9cc;
+    max-width:480px;
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn-primary{
+    font-family:'Oswald',sans-serif; font-weight:600; font-size:14px;
+    letter-spacing:1px; text-transform:uppercase;
+    background:var(--orange); color:var(--navy-deep);
+    padding:16px 30px; border-radius:2px; display:inline-flex; align-items:center; gap:10px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 10px 26px rgba(255,90,31,0.4);}
+  .btn-ghost{
+    font-family:'Oswald',sans-serif; font-weight:600; font-size:14px;
+    letter-spacing:1px; text-transform:uppercase;
+    border:1.5px solid var(--line); color:var(--ice);
+    padding:16px 30px; border-radius:2px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--orange); background:rgba(255,90,31,0.08);}
+
+  .hero-mark{
+    flex:0 0 340px; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-mark img{
+    width:100%; max-width:340px;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,0.55));
+    animation:float 5s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-16px);}
+  }
+  .ring{
+    position:absolute; inset:-20px; border:1px solid var(--line);
+    border-radius:50%; animation:spin 24s linear infinite;
+  }
+  .ring::before{
+    content:''; position:absolute; top:-4px; left:50%; transform:translateX(-50%);
+    width:8px; height:8px; border-radius:50%; background:var(--orange);
+    box-shadow:0 0 14px 3px rgba(255,90,31,0.7);
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-mark img, .ring{animation:none;}
+  }
+
+  /* ---------- marquee strip ---------- */
+  .marquee{
+    position:relative; z-index:1;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background:var(--navy);
+    overflow:hidden; padding:14px 0;
+  }
+  .marquee-track{
+    display:flex; gap:48px; white-space:nowrap;
+    animation:scroll 22s linear infinite;
+    width:max-content;
+  }
+  .marquee-track span{
+    font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:2px;
+    text-transform:uppercase; color:#8592a8; display:flex; align-items:center; gap:12px;
+  }
+  .marquee-track span::after{content:'✦'; color:var(--orange);}
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- section shared ---------- */
+  section{position:relative; z-index:1; padding:120px 0;}
+  .section-head{margin-bottom:56px; max-width:640px;}
+  .kicker{
+    font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:3px;
+    text-transform:uppercase; color:var(--orange-2); margin-bottom:14px;
+    display:block;
+  }
+  h2{
+    font-family:'Anton', sans-serif; font-size:clamp(32px, 4.2vw, 50px);
+    text-transform:uppercase; line-height:1.05; letter-spacing:0.3px;
+  }
+  .section-sub{margin-top:16px; color:#aeb9cc; font-size:16px; line-height:1.7;}
+
+  /* ---------- services ---------- */
+  .services{background:var(--navy);}
+  .service-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--navy-deep); padding:40px 32px;
+    transition:background .25s ease;
+  }
+  .service-card:hover{background:#1a1a1a;}
+  .service-num{
+    font-family:'Anton', sans-serif; font-size:14px; color:var(--orange);
+    letter-spacing:2px;
+  }
+  .service-card h3{
+    font-family:'Oswald',sans-serif; font-size:21px; text-transform:uppercase;
+    margin:18px 0 12px; letter-spacing:0.5px;
+  }
+  .service-card p{color:#aeb9cc; font-size:14.5px; line-height:1.7;}
+
+  /* ---------- portfolio ---------- */
+  .work-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;
+  }
+  .work-item{
+    background:linear-gradient(160deg, #1c1c1c, #0a0a0a);
+    border:1px solid var(--line); border-radius:6px;
+    padding:28px; display:flex; align-items:center; justify-content:center;
+    aspect-ratio:1/1; position:relative; overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .work-item:hover{transform:translateY(-6px); border-color:rgba(255,90,31,0.5);}
+  .work-item img{max-width:78%; max-height:78%; object-fit:contain; position:relative; z-index:1;}
+  .work-item .tag{
+    position:absolute; bottom:12px; left:14px;
+    font-family:'Oswald',sans-serif; font-size:10.5px; letter-spacing:1.5px;
+    text-transform:uppercase; color:#6f7d95; z-index:1;
+  }
+  .work-item.wide{grid-column:span 2;}
+  .work-item.dark{background:#000;}
+
+  @media (max-width:860px){
+    .work-grid{grid-template-columns:repeat(2, 1fr);}
+    .work-item.wide{grid-column:span 2;}
+  }
+
+  /* ---------- process ---------- */
+  .process{background:var(--navy);}
+  .process-list{display:flex; flex-direction:column;}
+  .process-row{
+    display:grid; grid-template-columns:80px 1fr; gap:28px;
+    padding:30px 0; border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .process-row:first-child{border-top:1px solid var(--line);}
+  .process-idx{
+    font-family:'Anton', sans-serif; font-size:38px; color:transparent;
+    -webkit-text-stroke:1.5px var(--orange);
+  }
+  .process-row h4{
+    font-family:'Oswald',sans-serif; font-size:19px; text-transform:uppercase;
+    margin-bottom:8px; letter-spacing:0.5px;
+  }
+  .process-row p{color:#aeb9cc; font-size:14.5px; line-height:1.7; max-width:560px;}
+
+  /* ---------- pricing ---------- */
+  .pricing{background:var(--navy);}
+  .price-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+  }
+  .price-card{
+    background:var(--navy-deep); border:1px solid var(--line); border-radius:8px;
+    padding:34px 28px; display:flex; flex-direction:column; gap:18px;
+    transition:transform .25s ease, border-color .25s ease;
+    position:relative; overflow:hidden;
+  }
+  .price-card:hover{transform:translateY(-6px); border-color:rgba(255,90,31,0.5);}
+  .price-card.featured{
+    grid-column:span 3;
+    background:linear-gradient(120deg, #1c1c1c, #0a0a0a);
+    border-color:rgba(255,90,31,0.45);
+    flex-direction:row; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;
+  }
+  .price-card.featured::before{
+    content:'ALL-IN-ONE'; position:absolute; top:18px; right:-38px;
+    background:var(--orange); color:var(--navy-deep);
+    font-family:'Oswald',sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px;
+    padding:5px 44px; transform:rotate(35deg);
+  }
+  .price-card h3{
+    font-family:'Oswald',sans-serif; font-size:16px; text-transform:uppercase;
+    letter-spacing:0.5px; color:#c7d2e3; font-weight:500;
+  }
+  .price-tag{
+    font-family:'Anton', sans-serif; font-size:44px; color:var(--white); line-height:1;
+    display:flex; align-items:baseline; gap:4px;
+  }
+  .price-tag .cur{font-size:22px; color:var(--orange-2);}
+  .price-tag .per{
+    font-family:'Inter',sans-serif; font-size:13px; color:#6f7d95; font-weight:400; margin-left:4px;
+  }
+  .price-card p{color:#aeb9cc; font-size:14px; line-height:1.6;}
+  .price-card .btn-line{
+    margin-top:auto; font-family:'Oswald',sans-serif; font-size:12.5px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--orange); display:inline-flex; align-items:center; gap:6px;
+  }
+  .featured-copy{flex:1 1 280px;}
+  .featured-copy h3{font-size:20px; margin-bottom:8px; color:var(--ice);}
+  .featured-copy p{max-width:420px;}
+  .featured-price{text-align:right;}
+  @media (max-width:760px){
+    .price-grid{grid-template-columns:1fr 1fr;}
+    .price-card.featured{grid-column:span 2; flex-direction:column; align-items:flex-start; text-align:left;}
+    .featured-price{text-align:left;}
+  }
+  @media (max-width:560px){
+    .price-grid{grid-template-columns:1fr;}
+    .price-card.featured{grid-column:span 1;}
+  }
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:linear-gradient(180deg, var(--navy-deep), #000000);
+  }
+  .contact-panel{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:0;
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  }
+  .contact-left{
+    padding:56px; background:var(--navy);
+  }
+  .contact-left h2{margin-bottom:16px;}
+  .contact-left p{color:#aeb9cc; font-size:15.5px; line-height:1.7; max-width:420px;}
+  .contact-links{margin-top:34px; display:flex; flex-direction:column; gap:0;}
+  .contact-link{
+    display:flex; align-items:center; gap:16px;
+    padding:18px 0; border-top:1px solid var(--line);
+    transition:padding-left .25s ease;
+  }
+  .contact-links .contact-link:last-child{border-bottom:1px solid var(--line);}
+  .contact-link:hover{padding-left:8px;}
+  .contact-icon{
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(255,90,31,0.12); border:1px solid rgba(255,90,31,0.35);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--orange); font-size:18px; flex:0 0 auto;
+  }
+  .contact-link .label{
+    font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:1.5px;
+    text-transform:uppercase; color:#6f7d95; display:block;
+  }
+  .contact-link .value{font-size:16px; font-weight:600; color:var(--ice);}
+  .contact-right{
+    background:var(--navy-deep); padding:56px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+    position:relative;
+  }
+  .contact-right::before{
+    content:''; position:absolute; inset:0;
+    background-image:radial-gradient(circle at center, rgba(255,90,31,0.10), transparent 70%);
+  }
+  .contact-right img{width:150px; margin-bottom:26px; position:relative; z-index:1;}
+  .contact-right .tagline{
+    font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:2px;
+    text-transform:uppercase; color:var(--orange-2); position:relative; z-index:1;
+  }
+  .contact-right .est{
+    margin-top:8px; font-size:12px; color:#6f7d95; letter-spacing:1px; position:relative; z-index:1;
+  }
+
+  @media (max-width:760px){
+    .contact-panel{grid-template-columns:1fr;}
+    .contact-left, .contact-right{padding:36px 28px;}
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:32px 0; position:relative; z-index:1;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+  }
+  footer p{font-size:12.5px; color:#6f7d95;}
+  .footer-socials{display:flex; gap:18px;}
+  .footer-socials a{font-size:12.5px; color:#aeb9cc; letter-spacing:0.5px;}
+  .footer-socials a:hover{color:var(--orange);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .service-grid{grid-template-columns:1fr;}
+    nav{
+      position:fixed; top:68px; left:0; right:0; bottom:0;
+      background:var(--navy-deep); flex-direction:column; padding:32px 24px; gap:0;
+      transform:translateX(100%); transition:transform .3s ease; z-index:49;
+    }
+    nav.open{transform:translateX(0);}
+    nav a{padding:16px 0; border-bottom:1px solid var(--line); font-size:15px;}
+    .nav-toggle{
+      display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; z-index:60;
+    }
+    .nav-toggle span{width:24px; height:2px; background:var(--ice); display:block;}
+    .header-cta{display:none;}
+  }
+  @media (max-width:620px){
+    .work-grid{grid-template-columns:1fr 1fr;}
+    .hero{padding-top:150px;}
+    .hero-mark{order:-1; flex-basis:220px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="assets/icon-globe.png" alt="SportVerse">
+      <span>Sport<em>Verse</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="https://wa.me/918953804006" class="header-cta">Hire Me</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Graphic &amp; Web Designer</span>
+        <h1 class="headline">
+          Design that<br>
+          <span class="line2">plays to</span>
+          <span class="accent">win.</span>
+        </h1>
+        <p class="hero-sub">
+          Main sports brands, teams aur creators ke liye logos, jerseys-ready badges aur websites design karta hoon — bold, sharp, aur game-day ready. One universe, endless sports.
+        </p>
+        <div class="hero-actions">
+          <a href="https://wa.me/918953804006" class="btn-primary">Start a Project →</a>
+          <a href="#work" class="btn-ghost">View Work</a>
+        </div>
+      </div>
+      <div class="hero-mark">
+        <div class="ring"></div>
+        <img src="assets/logo-shield-silver.png" alt="SportVerse SV Shield Logo">
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Logo Design</span><span>Brand Identity</span><span>Mascot Art</span><span>Web Design</span><span>Sports Branding</span><span>Badge &amp; Crest</span>
+      <span>Logo Design</span><span>Brand Identity</span><span>Mascot Art</span><span>Web Design</span><span>Sports Branding</span><span>Badge &amp; Crest</span>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What I Do</span>
+        <h2>Built for teams,<br>brands &amp; creators</h2>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <span class="service-num">01</span>
+          <h3>Logo &amp; Crest Design</h3>
+          <p>Team shields, esports marks aur brand icons — clean vector work jo jersey se lekar app icon tak har jagah punch kare.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">02</span>
+          <h3>Mascot &amp; Character Art</h3>
+          <p>Custom mascots jo team ki energy dikhaye — social media, merchandise aur matchday graphics ke liye ready.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">03</span>
+          <h3>Web Design</h3>
+          <p>Fast, mobile-first websites for teams, tournaments aur personal brands — apne phone se hi manage kar sakte ho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Selected Work</span>
+        <h2>From concept<br>to crest</h2>
+        <p class="section-sub">SportVerse identity ke kuch exploration aur finals — brand marks, wordmarks aur character design.</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-item">
+          <img src="assets/logo-shield-silver.png" alt="SV Shield Logo — steel and blue crest">
+          <span class="tag">SV Crest</span>
+        </div>
+        <div class="work-item dark">
+          <img src="assets/mascot-tiger.png" alt="SportVerse Tiger Mascot">
+          <span class="tag">Mascot</span>
+        </div>
+        <div class="work-item">
+          <img src="assets/badge-gold.png" alt="SportVerse Gold Badge Emblem">
+          <span class="tag">Est. 2024 Badge</span>
+        </div>
+        <div class="work-item">
+          <img src="assets/icon-globe.png" alt="SportVerse Globe Icon">
+          <span class="tag">Icon Mark</span>
+        </div>
+        <div class="work-item wide">
+          <img src="assets/logo-wordmark-black-orange.png" alt="SportVerse Wordmark">
+          <span class="tag">Wordmark — Contrast</span>
+        </div>
+        <div class="work-item wide">
+          <img src="assets/logo-full-navy-orange.jpg" alt="SportVerse Full Logo Navy Orange">
+          <span class="tag">Primary Lockup</span>
+        </div>
+        <div class="work-item">
+          <img src="assets/logo-s-swoosh.png" alt="SportVerse S Swoosh Mark">
+          <span class="tag">Swoosh Study</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">How We Work</span>
+        <h2>Simple process,<br>solid results</h2>
+      </div>
+      <div class="process-list">
+        <div class="process-row">
+          <span class="process-idx">01</span>
+          <div>
+            <h4>Brief on WhatsApp</h4>
+            <p>Apna idea, reference aur colors WhatsApp pe bhejo — 8953804006. Free consultation, koi form nahi bharna.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <span class="process-idx">02</span>
+          <div>
+            <h4>Concepts</h4>
+            <p>2–3 design directions milte hain screen pe dekhne ke liye, saath mein short explanation ki har concept kyun kaam karega.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <span class="process-idx">03</span>
+          <div>
+            <h4>Refine</h4>
+            <p>Feedback ke hisaab se final direction ko polish kiya jaata hai — colors, spacing, aur detailing tak.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <span class="process-idx">04</span>
+          <div>
+            <h4>Delivery</h4>
+            <p>Final files — PNG, high-res aur source — seedha WhatsApp ya Instagram DM pe milte hain, ready to use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Pricing</span>
+        <h2>Simple rates,<br>no hidden cost</h2>
+        <p class="section-sub">Jo chahiye wahi lo — single post se lekar poora social media handle karne tak.</p>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>Per Post Design</h3>
+          <div class="price-tag"><span class="cur">₹</span>49<span class="per">/ post</span></div>
+          <p>Ek single Instagram post ka custom graphic design — ready to upload.</p>
+          <a href="https://wa.me/918953804006" class="btn-line">Order Now →</a>
+        </div>
+        <div class="price-card">
+          <h3>Model / Style Add-on</h3>
+          <div class="price-tag"><span class="cur">₹</span>99<span class="per">/ design</span></div>
+          <p>Alag-alag model styles ya design variations add karwao apne content mein.</p>
+          <a href="https://wa.me/918953804006" class="btn-line">Order Now →</a>
+        </div>
+        <div class="price-card">
+          <h3>Short Video Edit</h3>
+          <div class="price-tag"><span class="cur">₹</span>139<span class="per">/ video</span></div>
+          <p>Reels ya short-form video editing — cuts, text, transitions ke saath.</p>
+          <a href="https://wa.me/918953804006" class="btn-line">Order Now →</a>
+        </div>
+        <div class="price-card">
+          <h3>Full Month Handle</h3>
+          <div class="price-tag"><span class="cur">₹</span>2,999<span class="per">/ month</span></div>
+          <p>Poora Instagram page monthly manage — posts, design aur consistency ke saath.</p>
+          <a href="https://wa.me/918953804006" class="btn-line">Order Now →</a>
+        </div>
+        <div class="price-card featured">
+          <div class="featured-copy">
+            <h3>Twitter + Instagram + LinkedIn</h3>
+            <p>Teeno platforms ek saath fully managed — content, design aur posting, sab kuch ek jagah se.</p>
+          </div>
+          <div class="featured-price">
+            <div class="price-tag"><span class="cur">₹</span>99,999<span class="per">/ month</span></div>
+            <a href="https://wa.me/918953804006" class="btn-line">Get Started →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-panel">
+        <div class="contact-left">
+          <span class="kicker">Get In Touch</span>
+          <h2>Let's build<br>your brand</h2>
+          <p>Koi bhi sports team, creator ya business ho — apna project discuss karne ke liye neeche se contact karo.</p>
+          <div class="contact-links">
+            <a href="tel:+918953804006" class="contact-link">
+              <div class="contact-icon">☎</div>
+              <div>
+                <span class="label">Call</span>
+                <span class="value">+91 89538 04006</span>
+              </div>
+            </a>
+            <a href="https://wa.me/918953804006" class="contact-link">
+              <div class="contact-icon">💬</div>
+              <div>
+                <span class="label">WhatsApp</span>
+                <span class="value">+91 89538 04006</span>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/sport_verse_07" class="contact-link" target="_blank" rel="noopener">
+              <div class="contact-icon">📷</div>
+              <div>
+                <span class="label">Instagram</span>
+                <span class="value">@sport_verse_07</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-right">
+          <img src="assets/logo-full-navy-orange.jpg" alt="SportVerse Logo">
+          <span class="tagline">One Universe.</span>
+          <span class="est">Endless Sports — Est. 2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 SportVerse. All designs original work.</p>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/sport_verse_07" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/918953804006">WhatsApp</a>
+      <a href="tel:+918953804006">Call</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+</script>
+
+</body>
+</html>
